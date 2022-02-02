@@ -1,3 +1,5 @@
+======================== Mandatory Part ======================
+
 Q: Why Debian?
 A: It's easier to install and configure than CentOS (and i haven't use CentOS befoe)
 
@@ -29,6 +31,21 @@ A: SSH, also known as Secure Shell or Secure Socket Shell, is a network protocol
 administrators, a secure way to access a computer over an unsecured network.
 (read more: https://searchsecurity.techtarget.com/definition/Secure-Shell)
 
+
+======================== Simple Setup ========================
+
+Password Rules: .-abCD1234
+Check UFW:      sudo ufw status
+Check SSH:      sudo service ssh status
+Check Debian:   hostnamectl
+
+======================== User ========================
+
+Check Group "sudo":   getent group sudo
+Check Group "user42": getent group user42
+
+PassWord Policy:      vim /etc/pam.d/common-password
+
 /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 | You have to create a new user here.        |
 | $ sudo adduser username                    | <- creating new user (yes (no))
@@ -37,11 +54,58 @@ administrators, a secure way to access a computer over an unsecured network.
 | $ sudo adduser username user42             | <- assign new user to sudo and user42 groups
 \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
+======================== Hostname and partitions ========================
 
------------------- Simple Setup -----------
+Check Hostname:     hostname
+Modify hostname:    1- hostnamectl 2- sudo -s 3- hostname set-hostname <name> 3- vi /etc/hosts 4- exit 5- hostnamectl
+Partitions for VM:  lsblk
 
-Password Rules: .-abCD1234
-Check UFW: sudo ufw status
-Check SSH: sudo service ssh status
-Check Debian: lsblk
------------------- User --------------------
+LVM - Logical Volume Management is a form of storage virtualization that offers system administrators a more flexible
+approach to managing disk storage space than traditional partitioning. 
+This type of virtualization tool is located within the device-driver stack on the operating system.
+
+======================== SUDO ========================
+
+Properly installed: sudo apt update (if are updates run sudo apt upgrade)
+Add user in sudo:   sudo adduser <name> sudo
+Rules for Sudo:     ????????
+Verrify directory:  cd /var/log/sudo
+Verify the logs:    1 - sudo 2- sudo vi /var/log/sudo/sudo.log
+
+======================== UFW ========================
+
+Properly installed: sudo apt install ufw
+Check working:      sudo ufw status
+What is UFW:
+Add New Port and Delete: 1- sudo ufw allow 8080 2- sudo ufw status 3- sudo ufw delete (rulle number)
+
+======================== SSH ========================
+
+Properly installed: sudo apt install ssh
+Check working:      sudo service ssh status
+What is SSH:
+Check working:      sudo service ssh status
+Finnaly:            ssh -p 4242 <user>@<ip>
+
+
+======================== Script ========================
+
+How Script works: sudo vim /usr/local/bin/monitoring.sh
+cron: The software utility cron is a time-based job scheduler in Unix-like computer operating systems.
+      The origin of the name cron is from the Greek word for time, χρόνος (chronos). Cron is most suitable for scheduling repetitive tasks. 
+      Scheduling one-time tasks can be accomplished using the associated at utility.
+script run every 10 mins: sudo crontab -e
+How change for 1:
+|***************************************************|
+| */10 * * * * /usr/local/bin/monitoring.sh         |
+| @reboot sleep 10; sh /usr/local/bin/monitoring.sh |
+|***************************************************|
+
+|***************************************************|
+| */1 * * * * /usr/local/bin/monitoring.sh          |
+| @reboot sleep 10; sh /usr/local/bin/monitoring.sh |
+|***************************************************|
+To stop script running on boot you just need to remove or commit
+|********************************|
+| @reboot /path/to/monitoring.sh |
+|********************************|
