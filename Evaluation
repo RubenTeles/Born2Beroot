@@ -57,7 +57,7 @@ PassWord Policy:      vim /etc/pam.d/common-password
 ======================== Hostname and partitions ========================
 
 Check Hostname:     hostname
-Modify hostname:    1- hostnamectl 2- sudo -s 3- hostname set-hostname <name> 3- vi /etc/hosts 4- exit 5- hostnamectl
+Modify hostname:    1- hostnamectl 2- sudo -s 3- hostnamectl set-hostname <name> 3- vi /etc/hosts 4- exit 5- hostnamectl
 Partitions for VM:  lsblk
 
 LVM - Logical Volume Management is a form of storage virtualization that offers system administrators a more flexible
@@ -109,3 +109,6 @@ To stop script running on boot you just need to remove or commit
 |********************************|
 | @reboot /path/to/monitoring.sh |
 |********************************|
+
+======================== For Signature ========================
+• Linux: sha1sum Born2Beroot.vdi
