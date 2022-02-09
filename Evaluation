@@ -52,6 +52,7 @@ PassWord Policy:      vim /etc/pam.d/common-password
 | $ sudo chage -l username                   | <- Verify password expire info for new user
 | $ sudo adduser username sudo               |
 | $ sudo adduser username user42             | <- assign new user to sudo and user42 groups
+| $ sudo groupadd <group>                    |
 \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
 ======================== Hostname and partitions ========================
